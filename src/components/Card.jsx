@@ -3,7 +3,9 @@ export default function Card (props) {
 
     return (
         <>
-            <div id="card" className={"c"+props.number}>card</div>
+            <div id="card" className={"c"+props.number}>
+                <p>card {props.number}</p>
+            </div>
         </>
     )
 

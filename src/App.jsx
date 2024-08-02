@@ -6,11 +6,14 @@ import Cards from './components/CardHolder'
 
 function App() {
   
-  const [numCards, updateNumCards] = useState(15);
+  const [numCards, updateNumCards] = useState(3);
+
+  const cards = Cards(numCards)
 
   return (
     <>
-      <Cards />
+      {cards.render}
+      <button onClick={cards.shuffle}>Shuffle</button>
     </>
   )
 }
