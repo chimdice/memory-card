@@ -13,21 +13,56 @@ export default function Cards (totalCards) {
     }
 
     const [cards, updateNumCards] = useState([]);
+    const [selectedCards, changeSelectedCards] = useState({});
     const [currentScore, updateCurrentScore] = useState(0);
     const [totalScore, updateTotalScore] = useState(0);
+    const [game, resetGame] = useState(0);
+    const [reset, updateReset] = useState(false)
 
-    //initalize array
     useEffect(()=>{
-        if (effectRan.current === false) {
+        //new game
+        if (reset) {
+            updateNumCards([]);
+            changeSelectedCards({});
+            updateCurrentScore(0);
             for (let i = 0; i < totalCards; i++) {
                 updateNumCards(old => [...old, i])
+                const cardKey = 'c'+i;
+                const element = {};
+                element[cardKey] = false;
+
+                changeSelectedCards(old => ({
+                    ...old,
+                    ...element
+                }))
             }
+            console.log('hi')
+        }
+
+         //initalize
+        if (effectRan.current === false) {
+            updateNumCards([]);
+            changeSelectedCards({});
+            updateCurrentScore(0);
+            for (let i = 0; i < totalCards; i++) {
+                updateNumCards(old => [...old, i])
+                const cardKey = 'c'+i;
+                const element = {};
+                element[cardKey] = false;
+
+                changeSelectedCards(old => ({
+                    ...old,
+                    ...element
+                }))
+            }
+            updateReset(true)
 
             return () => {
                 effectRan.current = true;
             }
+
         }
-    }, [])
+    }, [game])
     
 
     const shuffleCards = () => {
@@ -46,13 +81,33 @@ export default function Cards (totalCards) {
     }
 
 
-    const clickCard = () => {
-        updateCurrentScore(old => old +1);
-        console.log(currentScore, totalScore);
-        if (currentScore >= totalScore) {
-            updateTotalScore(old => old +1);
+    const clickCard = (event) => {
+
+        let selected;
+        if (event.target.nodeName === 'P') {
+            selected = event.target.parentNode.className;
+        } else {
+            selected = event.target.className;
         }
-        shuffleCards();
+
+        if (! selectedCards[selected]){
+            updateCurrentScore(old => old +1);
+            if (currentScore >= totalScore) {
+                updateTotalScore(old => old +1);
+            }
+
+            shuffleCards();
+
+            const newelement = {};
+            newelement[selected] = true;
+            changeSelectedCards( old => ({
+                ...old,
+                ...newelement
+            }));
+        } else {
+            resetGame(old => old + 1);
+        }
+        
     }
 
     return ({
