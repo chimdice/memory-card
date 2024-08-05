@@ -6,14 +6,16 @@ import Cards from './components/CardHolder'
 
 function App() {
   
-  const [numCards, updateNumCards] = useState(3);
+  const [numCards, updateNumCards] = useState(10);
 
   const cards = Cards(numCards)
 
   return (
     <>
+      <h1>Memory Game</h1>
+      <h2>Current Score: {cards.current}</h2>
+      <h2>High Score: {cards.total}</h2>
       {cards.render}
-      <button onClick={cards.shuffle}>Shuffle</button>
     </>
   )
 }

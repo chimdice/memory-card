@@ -13,6 +13,9 @@ export default function Cards (totalCards) {
     }
 
     const [cards, updateNumCards] = useState([]);
+    const [currentScore, updateCurrentScore] = useState(0);
+    const [totalScore, updateTotalScore] = useState(0);
+
     //initalize array
     useEffect(()=>{
         if (effectRan.current === false) {
@@ -42,12 +45,23 @@ export default function Cards (totalCards) {
         updateNumCards(newArray);
     }
 
+
+    const clickCard = () => {
+        updateCurrentScore(old => old +1);
+        console.log(currentScore, totalScore);
+        if (currentScore >= totalScore) {
+            updateTotalScore(old => old +1);
+        }
+        shuffleCards();
+    }
+
     return ({
-        shuffle:shuffleCards,
+        current:currentScore,
+        total: totalScore,
         render:(
         <>
             <div className="holder" style={style}>
-                {cards.map(value => <Card key={value} number={value}/>)}
+                {cards.map(value => <Card key={value} number={value} click={clickCard}/>)}
             </div>
         </>
         )

@@ -45,3 +45,7 @@
   border: 1px black solid;
   background-color: rgb(239, 192, 106);
 }
+
+#card:hover {
+  cursor: pointer;
+}
