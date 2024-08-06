@@ -4,6 +4,7 @@ import Card from "./Card"
 export default function Cards (totalCards) {
 
     const effectRan = useRef(false);
+    const apiKey = 'BhsRqK0Ius3TygMVCm0kIATb0KGFwsrN';
 
     const style = {
         fontSize: 50,
@@ -14,10 +15,25 @@ export default function Cards (totalCards) {
 
     const [cards, updateNumCards] = useState([]);
     const [selectedCards, changeSelectedCards] = useState({});
+    const [gifs, updateGifs] = useState([])
+
     const [currentScore, updateCurrentScore] = useState(0);
     const [totalScore, updateTotalScore] = useState(0);
     const [game, resetGame] = useState(0);
     const [reset, updateReset] = useState(false)
+
+    async function fetchCards () {
+        const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key='+apiKey+'&s=anime', {mode:'cors'});
+        const json = await response.json();
+        const url = json.data.images.original.url;
+        console.log(url)
+        if (gifs.includes(url)) {
+            fetchCards()
+        } else {
+            console.log(url)
+            updateGifs(old => [...old, url])
+        }
+    }
 
     useEffect(()=>{
         //new game
@@ -54,6 +70,8 @@ export default function Cards (totalCards) {
                     ...old,
                     ...element
                 }))
+
+                //fetchCards();
             }
             updateReset(true)
 
