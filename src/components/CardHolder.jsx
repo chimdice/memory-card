@@ -4,7 +4,6 @@ import Card from "./Card"
 export default function Cards (totalCards) {
 
     const effectRan = useRef(false);
-    const apiKey = 'BhsRqK0Ius3TygMVCm0kIATb0KGFwsrN';
 
     const style = {
         fontSize: 50,
@@ -23,13 +22,18 @@ export default function Cards (totalCards) {
     const [game, resetGame] = useState(0);
     const [reset, updateReset] = useState(false)
 
-    async function fetchCards () {
-        const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key='+apiKey+'&s=anime', {mode:'cors'});
+    const generateRandomNumber = () => {
+        return Math.floor(Math.random()*1000)
+    }
+
+    async function fetchCards (number) {
+        const response = await fetch('https://pokeapi.co/api/v2/pokemon/'+number, {mode:'cors'});
         const json = await response.json();
-        const url = json.data.images.original.url;
+        const url = json.sprites.front_default;
         console.log(url)
         if (gifs.includes(url)) {
-            fetchCards()
+            const num = generateRandomNumber();
+            fetchCards(num)
         } else {
             console.log(url)
             updateGifs(old => [...old, url])
@@ -41,6 +45,7 @@ export default function Cards (totalCards) {
         if (reset) {
             updateNumCards([]);
             changeSelectedCards({});
+            updateGifs([]);
             updateCurrentScore(0);
             for (let i = 0; i < totalCards; i++) {
                 updateNumCards(old => [...old, i])
@@ -52,6 +57,9 @@ export default function Cards (totalCards) {
                     ...old,
                     ...element
                 }))
+
+                const num = generateRandomNumber();
+                fetchCards(num);
             }
             console.log('hi')
         }
@@ -60,6 +68,7 @@ export default function Cards (totalCards) {
         if (effectRan.current === false) {
             updateNumCards([]);
             changeSelectedCards({});
+            updateGifs([]);
             updateCurrentScore(0);
             for (let i = 0; i < totalCards; i++) {
                 updateNumCards(old => [...old, i])
@@ -72,7 +81,8 @@ export default function Cards (totalCards) {
                     ...element
                 }))
 
-                //fetchCards();
+                const num = generateRandomNumber();
+                fetchCards(num);
             }
             updateReset(true)
 
@@ -135,7 +145,7 @@ export default function Cards (totalCards) {
         render:(
         <>
             <div className="holder" style={style}>
-                {cards.map(value => <Card key={value} number={value} click={clickCard}/>)}
+                {cards.map(value => <Card key={value} number={value} click={clickCard} pokemon={gifs[value]}/>)}
             </div>
         </>
         )
