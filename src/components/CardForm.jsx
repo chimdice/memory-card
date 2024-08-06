@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 export default function CardForm (props) {
-    const [currentValue, changeValue] = useState(0);
 
     const click = (event) => {
         event.preventDefault();
@@ -18,11 +17,16 @@ export default function CardForm (props) {
         button.classList.toggle('hide');
     }
 
+    const style = {
+        padding: '5px 10px 5px 10px',
+        margin: '10px'
+    }
+
     return (
         <form className="hide">
             <label htmlFor="cardNums">Number of Cards: </label>
-            <input type="number" id='cardNums' min={5} max={20} required/>
-            <input type="submit" onClick={click}/>
+            <input type="number" id='cardNums' min={5} max={20} style={style} required/>
+            <input type="submit" onClick={click} style={style}/>
         </form>
     )
 }
