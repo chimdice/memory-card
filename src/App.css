@@ -55,3 +55,46 @@
 .hide {
   display: none;
 }
+
+.holder {
+  font-size: 50;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 15px;
+  padding: 15px
+}
+
+
+@media (max-width: 500px) {
+  #card {
+    border: 1px black solid;
+    background-color: rgb(240, 219, 180);
+    width: 100px;
+    height: 100px;
+  }
+
+  .holder {
+    font-size: 50;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+    padding: 15px
+  }
+}
+
+@media (max-width: 1000px) and (min-width: 501px) {
+  #card {
+    border: 1px black solid;
+    background-color: rgb(240, 219, 180);
+    width: 160px;
+    height: 160px;
+  }
+
+  .holder {
+    font-size: 50;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+    padding: 15px
+  }
+}

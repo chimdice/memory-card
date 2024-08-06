@@ -5,14 +5,6 @@ export default function Cards (totalCards) {
 
     const effectRan = useRef(false);
 
-    const style = {
-        fontSize: 50,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
-        gap: '15px',
-        padding: '15px'
-    }
-
     const [cards, updateNumCards] = useState([]);
     const [selectedCards, changeSelectedCards] = useState({});
     const [gifs, updateGifs] = useState([])
@@ -144,7 +136,7 @@ export default function Cards (totalCards) {
         total: totalScore,
         render:(
         <>
-            <div className="holder" style={style}>
+            <div className="holder">
                 {cards.map(value => <Card key={value} number={value} click={clickCard} pokemon={gifs[value]}/>)}
             </div>
         </>
