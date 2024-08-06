@@ -29,7 +29,7 @@ function App() {
         <h2>High Score: {cards.total}</h2>
         {cards.render}
       </div>
-      <CardForm update={updateNumCards}/>
+      <CardForm update={updateNumCards} total={cards.updateTotal}/>
       <button onClick={change}>Change Number of Cards!</button>
     </>
   )

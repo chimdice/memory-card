@@ -1,5 +1,4 @@
 #root {
-  max-width: 1280px;
   min-width: 100svw;
   margin: 0 auto;
   text-align: center;
@@ -46,6 +45,7 @@
   background-color: rgb(240, 219, 180);
   width: 200px;
   height: 200px;
+  align-items: center;
 }
 
 #card:hover {
@@ -59,9 +59,11 @@
 .holder {
   font-size: 50;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, min(200px));
   gap: 15px;
-  padding: 15px
+  padding: 15px;
+  justify-items: center;
+  justify-content: center;
 }
 
 
@@ -71,6 +73,7 @@
     background-color: rgb(240, 219, 180);
     width: 100px;
     height: 100px;
+    align-items: center;
   }
 
   .holder {
@@ -78,11 +81,12 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 15px;
-    padding: 15px
+    padding: 15px;
+    justify-items: center;
   }
 }
 
-@media (max-width: 1000px) and (min-width: 501px) {
+@media (max-width: 900px) and (min-width: 501px) {
   #card {
     border: 1px black solid;
     background-color: rgb(240, 219, 180);
@@ -95,6 +99,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 15px;
-    padding: 15px
+    padding: 15px;
+    justify-items: center;
   }
 }

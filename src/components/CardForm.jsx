@@ -15,6 +15,7 @@ export default function CardForm (props) {
         game.classList.toggle('hide');
         form.classList.toggle('hide');
         button.classList.toggle('hide');
+        props.total(0);
     }
 
     const style = {

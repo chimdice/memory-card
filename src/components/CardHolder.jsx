@@ -134,6 +134,7 @@ export default function Cards (totalCards) {
     return ({
         current:currentScore,
         total: totalScore,
+        updateTotal: updateTotalScore,
         render:(
         <>
             <div className="holder">
